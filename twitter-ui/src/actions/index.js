@@ -3,6 +3,7 @@ export const SET_HASHTAG = "SET_HASHTAG";
 
 
 export function addTweet(tweet) {
+  console.log(tweet)
   return {
     type: ADD_NEW_TWEET,
     payload: tweet

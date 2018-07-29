@@ -8,23 +8,20 @@ const styles = {
 };
 
 class Button extends Component {
-  constructor(props) {
-    super(props);
+  static defaultProps = {
+    warning: false
+  };
+
+  constructor(props, defaultProps) {
+    super(props, defaultProps);
     this.state = {foundTweets: []};
-
-  }
- 
-
-  renderFoundTweets(tweet) {
-    return <div>{tweet.text}</div>
   }
 
   render() {
     const { text } = this.props;
     return (
-      <div style={styles.buttonStyle} onClick={event => this.props.handleClick()}>
+      <div style={styles.buttonStyle} onClick={event => {if (!this.props.warning) {this.props.handleClick()}}}>
         {text}
-        {this.state.foundTweets.map(tweet => this.renderFoundTweets(tweet))}
       </div>
     );
   }

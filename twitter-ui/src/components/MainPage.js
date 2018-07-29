@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTweet, setHashtag } from '../actions';
-import TextInput from './TextInput';
-import TweetsContainer from './TweetsContainer';
+import TextInput from '../containers/TextInput';
+import TweetsContainer from '../containers/TweetsContainer';
 import logo from '../logo.svg';
-import Button from './Button';
 import '../App.css';
 
-class MainPage extends Component {
-  handleClick() {
-    let url = `http://188.166.35.26:3005/search/${this.props.hashtag}`;
-    var request = new Request(url, {
-      method: 'GET',
-      mode: 'cors',
-      // data: 'The sky is green',
-      // redirect: 'follow',
-      headers: new Headers({
-        'Content-Type': 'text/plain'
-      })
-    });
-
-    //TODO: bunu id bazli listeleyelim
-    fetch(request)
-      .then(response => {
-        let res = response.json();        
-        return res;
-      })
-      .then(tweet => this.props.addTweet(tweet));
+const styles = {
+  searchStyle :{
+    display: 'flex',
+    flexDirection : 'row',
+    justifyContent: 'center',
+    marginTop: '20px'  
   }
+}
 
-  handleOnChange(text) {
-    this.props.setHashtag(text.target.value);
+class MainPage extends Component {
+  constructor() {
+    super();
   }
 
   render() {
@@ -40,16 +27,16 @@ class MainPage extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Çakma Twitter</h1>
         </header>
+        <div style={styles.searchStyle}>
         <TextInput
-          placeholder="Hashtag?"
-          handleOnChange={this.handleOnChange.bind(this)}
         />
-        <Button text="Tikla" handleClick={this.handleClick.bind(this)} />
+        </div>
         <TweetsContainer />
       </div>
     );
   }
 }
+
 
 function mapStateToProps(state) {
   return { hashtag: state.hashtag };
