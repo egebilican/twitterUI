@@ -17,7 +17,7 @@ const styles = {
   }
 };
 
-const TweetBox = ({ tweet }) => {
+const TweetBox =  tweet => {
   console.log(tweet);
   if (tweet) {
     return (
