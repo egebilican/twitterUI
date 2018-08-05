@@ -18,7 +18,7 @@ const MyInnerForm = props => {
     handleReset
   } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <label htmlFor="hashtag" style={{ display: 'block' }}>
         Hashtag
       </label>
@@ -29,9 +29,10 @@ const MyInnerForm = props => {
         value={values.hashtag}
         onChange={handleChange}
         onBlur={handleBlur}
+        autoFocus={true}
         className={
           errors.email && touched.email ? 'text-input error' : 'text-input'
-        }
+        }        
       />
       {errors.email &&
         touched.email && <div className="input-feedback">{errors.email}</div>}
@@ -59,7 +60,7 @@ const TextInput = withFormik({
   //     .required('Email is required!')
   // }),
   handleSubmit: (values, { props, setSubmitting, resetForm }) => {
-    let baseUrl = 'http://188.166.35.26:3005/search/';
+    let baseUrl = 'http://188.166.35.26/search/';
     let url = `${baseUrl}${values.hashtag}`;
     var request = new Request(url, {
       method: 'GET',
@@ -70,6 +71,8 @@ const TextInput = withFormik({
         'Content-Type': 'text/plain'
       })
     });
+    setSubmitting(false);
+    resetForm();
     fetch(request)
       .then(response => {
         let res = response.json();
@@ -78,8 +81,7 @@ const TextInput = withFormik({
       .then(tweet => {
         console.log(tweet);
         props.dispatch(addTweet(tweet));
-        setSubmitting(false);
-        resetForm();
+
       });
   },
   displayName: 'BasicForm' // helps with React DevTools

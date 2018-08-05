@@ -3,6 +3,8 @@ import React from 'react';
 const styles = {
   boxContainerStyle: {
     border: '1px solid #ebebeb',
+    borderRadius: '10px',
+    padding:'10px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'start'
@@ -18,7 +20,6 @@ const styles = {
 };
 
 const TweetBox = ({ tweet }) => {
-  console.log(tweet);
   if (tweet) {
     return (
       <div style={styles.boxContainerStyle} key={tweet.id}>

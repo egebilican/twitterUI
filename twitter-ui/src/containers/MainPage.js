@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTweet, setHashtag } from '../actions';
-import TextInput from '../containers/TextInput';
-import TweetsContainer from '../containers/TweetsContainer';
+import TextInput from './TextInput';
+import TweetsContainer from './TweetsContainer';
 import logo from '../logo.svg';
 import '../App.css';
 

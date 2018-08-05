@@ -1,27 +1,10 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import TweetList from '../components/TweetBox';
+import TweetList from '../components/TweetList';
 
-const asd = 'ege';
-
-
-//TODO:bozuk:D
-const mapStateToProps = state => {
-  return {
-    state
-  }}​
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onTodoClick: id => {
-      dispatch(toggleTodo(id))
-    }
-  }
-}
-​
+const mapStateToProps = state => ({tweets:state.tweets})
 const TweetsContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(TweetList)
-​
-export default TweetsContainer
+
+export default  TweetsContainer
