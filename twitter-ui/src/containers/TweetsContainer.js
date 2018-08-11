@@ -6,6 +6,7 @@ const mapStateToProps = state => ({tweets:state.tweets})
 const mapDispatchToProps = dispatch => {
   return {
     handleRetweet: tweet => {
+      console.log(tweet)
       dispatch(retweet(tweet))
     }
   }

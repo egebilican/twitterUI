@@ -5,47 +5,35 @@ const Box = styled.div`
   border: 1px solid
     ${props => {
       if (props.hovered) {
-        return 'red';
+        return 'black';
       }
       return '#ebebeb';
     }};
-  borderradius: 10px;
+  border-radius: 10px;
   padding: 10px;
   display: flex;
-  flexdirection: column;
-  alignitems: start;
+  flex-direction: column;
+  align-items: start;
+  background: ${props => props.hovered ? '#ebebeb' : 'none'};
 `;
 
-const styles = {
-  boxContainerStyle: {
-    border: '1px solid #ebebeb',
-    borderRadius: '10px',
-    padding: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'start'
-  },
-  boxContainerStyleHovered: {
-    border: '1px solid black',
-    borderRadius: '10px',
-    padding: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'start',
-    background: '#ebebeb'
-  },
-  userStyle: {
-    flex: 0,
-    color: 'grey'
-  },
-  textStyle: {
-    flex: 1,
-    fontSize: '1.2em'
-  }
-};
+const TextItem = styled.span`
+    flex: 0;
+    color: grey;
+`
+const TweetText = TextItem.extend`
+    flex:1;
+    fontSize: 1.2em;
+    color: black;
+`
 
-//TODO:Hovered neden true?
-//TODO:gerisini de tasi
+const Retweet = TextItem.extend`
+    display: ${props => props.hovered ? "block" : "none"};
+    color: red;
+    align-self: center;
+    cursor: pointer;
+`
+
 class TweetBox extends Component {
   constructor(props) {
     super(props);
@@ -57,39 +45,19 @@ class TweetBox extends Component {
       return (
         <Box
           key={tweet.id}
-          onMouseOver={() => { this.setState({ hovered: true }); }}
-          hovered = {this.state.hovered}
+          onMouseOver={() => {
+            this.setState({ hovered: true });
+          }}
+          onMouseOut={() => {
+            this.setState({ hovered: false });
+          }}
+          hovered={this.state.hovered}
         >
-          {tweet.text}
+          <TextItem>{`User: ${tweet.user} Tweet Id: ${tweet.id}`}</TextItem>
+          <TweetText>{`${tweet.text}`}</TweetText>
+          <Retweet hovered={this.state.hovered} onClick={() => handleClick(tweet.id)}>Retweet</Retweet>
         </Box>
-        // <div
-        //   style={
-        //     this.state.hovered
-        //       ? styles.boxContainerStyleHovered
-        //       : styles.boxContainerStyle
-        //   }
-        //   key={tweet.id}
-        //   onMouseOver={() => {
-        //     this.setState({ hovered: true });
-        //   }}
-        //   onMouseOut={() => {
-        //     this.setState({ hovered: false });
-        //   }}
-        // >
-        //   <span style={styles.userStyle}>{`User: ${tweet.user}`}</span>
-        //   <span style={styles.textStyle}>{`${tweet.text}`}</span>
-        //   <span
-        //     style={{
-        //       display: this.state.hovered ? 'flex' : 'none',
-        //       color: 'red'
-        //     }}
-        //     onClick={() => handleClick(tweet.id)}
-        //   >
-        //     Retweet
-        //   </span>
-
-        // </div>
-      );
+      )
     } else {
       return <div>Bi sorun var datada sanirim</div>;
     }
