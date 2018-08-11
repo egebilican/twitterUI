@@ -4,6 +4,8 @@ import { addTweet, setHashtag } from '../actions';
 import TextInput from './TextInput';
 import TweetsContainer from './TweetsContainer';
 import logo from '../logo.svg';
+import theme from '../themes';
+import { ThemeProvider, injectGlobal } from 'styled-components';
 import '../App.css';
 
 const styles = {
@@ -22,6 +24,7 @@ class MainPage extends Component {
 
   render() {
     return (
+      <ThemeProvider theme={theme}>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -33,6 +36,7 @@ class MainPage extends Component {
         </div>
         <TweetsContainer />
       </div>
+      </ThemeProvider>
     );
   }
 }
