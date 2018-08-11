@@ -1,10 +1,10 @@
 import React from 'react';
 import TweetBox from './TweetBox';
 
-const TweetList = ({ tweets }) => {
+const TweetList = ({ tweets, handleRetweet }) => {
   return (
-  <div style={{ margin: '0 100px 0 100px' }}>
-    {tweets.map((tweet, index) => <TweetBox key={index} tweet={tweet} />)}
+  <div style={{ margin: '20px 100px 20px 100px' }}>
+    {tweets.map((tweet, index) => <TweetBox key={index} tweet={tweet} handleClick={handleRetweet}/>)}
   </div>
 )};
 
